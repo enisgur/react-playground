@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Table from "./Pages/Table/Table";
+
+import Pagination from "./examples/Pagination/Pagination";
+
+import "./styles/App/style.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <div className="navLinks">
+          <Link to="/">Home</Link>
+          <Link to="/dash">Dash</Link>
+          <Link to="/table">Table</Link>
+          <Link to="/examplepagination">pagination example</Link>
+        </div>
+
+        <Route
+          exact
+          path="/"
+          render={() => {
+            return <div>Home</div>;
+          }}
+        />
+        <Route exact path="/table" component={Table} />
+        <Route exact path="/dash" component={Dashboard} />
+        <Route exact path="/examplepagination" component={Pagination} />
+      </Router>
     </div>
   );
 }

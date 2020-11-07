@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navLinks {
+    width: 100%;
+    height: 60px;
+    background-color: #ffcece;
+    box-shadow: .6px .4px 15px black;
+    margin-bottom: 10px;
+}
+
+.navLinks a {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    
+}

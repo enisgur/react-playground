@@ -1,0 +1,70 @@
+
+  .pagination {
+      /* background-color: red; */
+      /* text-align: center; */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+  }
+
+  .pagination ul {
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+  }
+  .pagination ul li {
+    color: black;
+    /* float: left; */
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+  .pagination ul .active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+  }
+
+  .pagination ul li:hover:not(.active) {background-color: #ddd;}
+
+
+  .pagination .breaker {
+      display: flex;
+  }
+  .pagination .breaker .breaker-dot {
+    color: black;
+    /* float: left; */
+    padding: 4px 10px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+  .pagination .breaker .breaker-page {
+    color: black;
+    /* float: left; */
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+
+
+  .pagination .btn-prev,
+  .pagination .btn-next{
+    cursor: pointer;
+    color: black;
+    /* float: left; */
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+  }
+  .pagination .btn-prev:hover,
+  .pagination .btn-next:hover {
+    background-color: #ddd;
+  }
