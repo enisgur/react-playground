@@ -13,7 +13,6 @@ export default function tBody(data, headings, actions) {
   }
 
   setButtonsLabel();
-  console.log("buttons", buttons);
 
   return data[0] ? (
     actions && buttons ? (

@@ -40,7 +40,8 @@ const Table = ({
   }
 
   const headClicked = (e) => {
-    sortData(data, e.target.id, isSorted).then(setIsSorted(!isSorted));
+    // sortData(data, e.target.id, isSorted).then(setIsSorted(!isSorted));
+    sortData(currentData, e.target.id, isSorted).then(setIsSorted(!isSorted));
   };
 
   useEffect(() => {
