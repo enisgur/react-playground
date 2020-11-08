@@ -1,6 +1,4 @@
 export default function tHead(headings, headClicked, actions) {
-  console.log(actions);
-
   return actions ? (
     <>
       {headings.map((head, i) => {
