@@ -56,7 +56,11 @@ const Table = () => {
         actions={actions}
         // limitPage={20} // default = 10 you dont need to spesify it !
       />
-      <DataTable tableData={testData} hide="id" />
+      <DataTable
+        tableData={testData}
+        hide="id"
+        // actions={{ actions: [{ isActive: true, label: "test" }] }}
+      />
     </div>
   );
 };

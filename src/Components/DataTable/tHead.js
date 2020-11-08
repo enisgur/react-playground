@@ -1,5 +1,5 @@
 export default function tHead(headings, headClicked, actions) {
-  return actions ? (
+  return actions && actions.actions ? (
     <>
       {headings.map((head, i) => {
         return (

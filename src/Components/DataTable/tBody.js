@@ -13,7 +13,7 @@ export default function tBody(data, headings, actions) {
   }
 
   setButtonsLabel();
-  // console.log("buttons", buttons);
+  console.log("buttons", buttons);
 
   return data[0] ? (
     actions && buttons ? (
@@ -25,25 +25,28 @@ export default function tBody(data, headings, actions) {
               headings.map((row, i) => {
                 return <td key={i}>{column[row]}</td>;
               })}
-            <td className="tBody-action">
-              {buttons &&
-                buttons.map((aButtons, i) => {
-                  return (
-                    <button
-                      onClick={
-                        aButtons.callBack && ((e) => aButtons.callBack(e))
-                      }
-                      key={i}
-                      className={`table-button ${
-                        aButtons.class ? aButtons.class : ""
-                      }`}
-                      id={column.id ? column.id : column._id}
-                    >
-                      {aButtons.label ? aButtons.label : "No Label"}
-                    </button>
-                  );
-                })}
-            </td>
+            {buttons && buttons[0] && (
+              <td className="tBody-action">
+                {buttons &&
+                  buttons[0] &&
+                  buttons.map((aButtons, i) => {
+                    return (
+                      <button
+                        onClick={
+                          aButtons.callBack && ((e) => aButtons.callBack(e))
+                        }
+                        key={i}
+                        className={`table-button ${
+                          aButtons.class ? aButtons.class : ""
+                        }`}
+                        id={column.id ? column.id : column._id}
+                      >
+                        {aButtons.label ? aButtons.label : "No Label"}
+                      </button>
+                    );
+                  })}
+              </td>
+            )}
           </tr>
         );
       })
