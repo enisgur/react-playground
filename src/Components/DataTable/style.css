@@ -1,4 +1,5 @@
 table {
+  position: relative;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -19,4 +20,52 @@ table {
     text-align: left;
     background-color: #4CAF50;
     color: white;
+  }
+
+  /* NO DATA */
+  table .no-data {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    
+  }
+
+
+  /* Table Action Buttons */
+  table .tHead-actions{
+    width: 230px;
+  }
+
+  table tr .tBody-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  table tr .tBody-action .table-button {
+    margin: 0;
+    width: 60px;
+    padding: 3px;
+    border-radius: 3px;
+  }
+  table tr .tBody-action .table-button:hover {
+    opacity: .8;
+    padding: 2px;
+    width: 56px;
+  }
+
+  table tr .tBody-action .edit {
+    background-color: #e8ffd2;
+    border: 1px solid #111111;
+  }
+
+  table tr .tBody-action .delete {
+    background-color: #ffd0d0;
+    border: 1px solid #111111;
+  }
+
+  table tr .tBody-action .delete:focus {
+    /* outline-offset: none;
+    outline: none; */
   }

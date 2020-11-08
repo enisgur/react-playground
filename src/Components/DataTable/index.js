@@ -9,10 +9,18 @@ import sortData from "./sortData";
 // paginations
 import Pagination from "./Pagination/Index";
 import { getTotalPage } from "./Pagination/paginationFunctions";
+// Search
+import Search from "./Search/Search";
 
 import "./style.css";
 
-const Table = ({ tableData, hide, limitPage }) => {
+const Table = ({
+  tableData,
+  hide,
+  limitPage,
+  searchable = false,
+  actions = false,
+}) => {
   const [data, setData] = useState([]);
   const [headings, setheadings] = useState([]);
   const [error, setError] = useState(false);
@@ -23,6 +31,8 @@ const Table = ({ tableData, hide, limitPage }) => {
   const [pageLimit, setPageLimit] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
+
+  const [currentData, setCurrentData] = useState([]);
 
   function errorFunc(msg) {
     setError(true);
@@ -57,6 +67,9 @@ const Table = ({ tableData, hide, limitPage }) => {
         try {
           setData(tableData);
           checkHeadings(tableData, hide).then((res) => setheadings(res));
+          getTotalPage(tableData.length, pageLimit).then((totalPage) =>
+            setTotalPages(Math.ceil(totalPage))
+          );
         } catch (err) {
           errorFunc("Api or Object Problem");
           return console.log("api or Object problem");
@@ -66,7 +79,7 @@ const Table = ({ tableData, hide, limitPage }) => {
 
     init();
     // eslint-disable-next-line
-  }, [tableData, hide]);
+  }, [tableData, hide, pageLimit]);
 
   useEffect(() => {
     if (limitPage) {
@@ -78,18 +91,52 @@ const Table = ({ tableData, hide, limitPage }) => {
     }
   }, [limitPage]);
 
+  useEffect(() => {
+    // GET CURRENT DATA FROM PAGINATION
+    const indexOfLastData = parseInt(currentPage) * parseInt(pageLimit);
+    const indexOfFirstData = indexOfLastData - parseInt(pageLimit);
+    setCurrentData(data.slice(indexOfFirstData, indexOfLastData));
+    // const currentData = data.slice(indexOfFirstData, indexOfLastData);
+  }, [data, currentPage, pageLimit]);
+
   const onPageChange = (page) => {
     setCurrentPage(parseInt(page));
   };
 
-  // GET CURRENT DATA FROM PAGINATION
-  const indexOfLastData = parseInt(currentPage) * parseInt(pageLimit);
-  const indexOfFirstData = indexOfLastData - parseInt(pageLimit);
-  const currentData = data.slice(indexOfFirstData, indexOfLastData);
+  const searchCallback = (query) => {
+    function search(data, query) {
+      // TODO => maybe add here checkHeadings to get all headings like that, because matbe data[0] heading might be different from other data[3] or etc..
+      const columns = data[0] && Object.keys(data[0]);
+      return data.filter((d) =>
+        columns.some(
+          (column) =>
+            d[column].toString().toLowerCase().indexOf(query.toLowerCase()) > -1
+        )
+      );
+    }
+    if (searchable) {
+      if (query !== "") {
+        getTotalPage(search(data, query).length, pageLimit).then((totalPage) =>
+          setTotalPages(Math.ceil(totalPage))
+        );
+        setCurrentPage(1);
+        return setCurrentData(search(data, query));
+      } else {
+        getTotalPage(search(data, query).length, pageLimit).then((totalPage) =>
+          setTotalPages(Math.ceil(totalPage))
+        );
+        setCurrentPage(1);
+        const indexOfLastData = parseInt(currentPage) * parseInt(pageLimit);
+        const indexOfFirstData = indexOfLastData - parseInt(pageLimit);
+        setCurrentData(data.slice(indexOfFirstData, indexOfLastData));
+      }
+    }
+  };
 
   return (
     <div>
       <h1>Table test</h1>
+      {searchable && <Search searchCallback={searchCallback} />}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -97,10 +144,10 @@ const Table = ({ tableData, hide, limitPage }) => {
       />
       <table>
         <thead>
-          <tr>{tHead(headings, headClicked)}</tr>
+          <tr>{tHead(headings, headClicked, actions)}</tr>
         </thead>
         {!error ? (
-          <tbody>{tBody(currentData, headings)}</tbody>
+          <tbody>{tBody(currentData, headings, actions)}</tbody>
         ) : (
           <div>{errorMessage}</div>
         )}

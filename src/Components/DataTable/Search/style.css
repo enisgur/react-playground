@@ -1,0 +1,16 @@
+
+.search-bar {
+width: 100%;
+height: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+}
+
+.search-bar .search-input {
+width: 50% ;
+padding: 5px;
+font-size: 15px;
+font-style: italic;
+}
