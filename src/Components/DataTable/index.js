@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import checkHeadings from "./checkHeadings";
+import { checkHeadings, setManualHeadings } from "./checkHeadings";
 import tBody from "./tBody";
 import tHead from "./tHead";
 import sortData from "./sortData";
@@ -17,11 +17,14 @@ import "./style.css";
 const Table = ({
   tableData,
   hide,
+  manualHeadings = false,
   limitPage,
   searchable = false,
   actions = false,
 }) => {
   const [data, setData] = useState([]);
+  const [isManualHeading, setIsManualHeading] = useState(false);
+  const [renderManualHeading, setRenderManuelHeading] = useState([]);
   const [headings, setheadings] = useState([]);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -51,10 +54,16 @@ const Table = ({
           .get(tableData)
           .then((res) => {
             setData(res.data);
-
-            checkHeadings(res.data, hide).then((resData) =>
-              setheadings(resData)
-            );
+            if (manualHeadings) {
+              setManualHeadings(manualHeadings).then((head) => {
+                setRenderManuelHeading(head);
+                setIsManualHeading(true);
+              });
+            } else {
+              checkHeadings(res.data, hide).then((resData) =>
+                setheadings(resData)
+              );
+            }
             getTotalPage(res.data.length, pageLimit).then((totalPage) =>
               setTotalPages(Math.ceil(totalPage))
             );
@@ -67,7 +76,14 @@ const Table = ({
       if (typeof tableData === "object") {
         try {
           setData(tableData);
-          checkHeadings(tableData, hide).then((res) => setheadings(res));
+          if (manualHeadings) {
+            setManualHeadings(manualHeadings).then((head) => {
+              setRenderManuelHeading(head);
+              setIsManualHeading(true);
+            });
+          } else {
+            checkHeadings(tableData, hide).then((res) => setheadings(res));
+          }
           getTotalPage(tableData.length, pageLimit).then((totalPage) =>
             setTotalPages(Math.ceil(totalPage))
           );
@@ -79,6 +95,9 @@ const Table = ({
     }
 
     init();
+    return () => {
+      setheadings([]);
+    };
     // eslint-disable-next-line
   }, [tableData, hide, pageLimit]);
 
@@ -145,12 +164,32 @@ const Table = ({
       />
       <table>
         <thead>
-          <tr>{tHead(headings, headClicked, actions)}</tr>
+          <tr>
+            {tHead(
+              headings,
+              headClicked,
+              actions,
+              isManualHeading,
+              renderManualHeading
+            )}
+          </tr>
         </thead>
         {!error ? (
-          <tbody>{tBody(currentData, headings, actions)}</tbody>
+          <tbody>
+            {tBody(
+              currentData,
+              headings,
+              actions,
+              isManualHeading,
+              renderManualHeading
+            )}
+          </tbody>
         ) : (
-          <div>{errorMessage}</div>
+          <tbody>
+            <tr>
+              <td>{errorMessage}</td>
+            </tr>
+          </tbody>
         )}
       </table>
     </div>

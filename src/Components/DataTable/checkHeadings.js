@@ -1,4 +1,12 @@
-export default async function checkHeadings(checkDatas, hide) {
+function removeItem(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
+
+export async function checkHeadings(checkDatas, hide) {
   let checkHeadings = [];
   checkDatas.map((checkData) => {
     // all keys from each data
@@ -31,12 +39,20 @@ export default async function checkHeadings(checkDatas, hide) {
   return checkHeadings;
 }
 
-function removeItem(arr, value) {
-  var index = arr.indexOf(value);
-  if (index > -1) {
-    arr.splice(index, 1);
+// FOR MANUEL HEADING SETUP
+
+export async function setManualHeadings(manuealHead) {
+  let manuelArray = [];
+  if (manuealHead.length > 0) {
+    manuealHead.map((head) => {
+      // setRenderManuelHeading((f) => [...f, head]);
+      manuelArray.push(head);
+    });
+    return manuelArray;
   }
-  return arr;
+
+  return manuelArray;
+  // setIsManualHeading(true);
 }
 
 // export default async function checkHeadings(checkDatas, hide) {
