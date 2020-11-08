@@ -155,7 +155,6 @@ const Table = ({
 
   return (
     <div>
-      <h1>Table test</h1>
       {searchable && <Search searchCallback={searchCallback} />}
       <Pagination
         currentPage={currentPage}
