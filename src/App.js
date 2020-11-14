@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Table from "./Pages/Table/Table";
+import Forms from "./Pages/Forms/Forms";
 
 import Pagination from "./examples/Pagination/Pagination";
 
@@ -16,6 +17,7 @@ function App() {
           <Link to="/dash">Dash</Link>
           <Link to="/table">Table</Link>
           <Link to="/examplepagination">pagination example</Link>
+          <Link to="/forms">Forms</Link>
         </div>
 
         <Route
@@ -26,6 +28,7 @@ function App() {
           }}
         />
         <Route exact path="/table" component={Table} />
+        <Route exact path="/forms" component={Forms} />
         <Route exact path="/dash" component={Dashboard} />
         <Route exact path="/examplepagination" component={Pagination} />
       </Router>
