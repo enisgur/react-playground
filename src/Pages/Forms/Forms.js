@@ -2,7 +2,12 @@ import React from "react";
 
 import CreateForms from "../../Components/Forms/CreateForms";
 
-// TODO : DO form Labels !
+const styles = {
+  position: "relative",
+  width: "300px",
+  height: "600px",
+  backgroundColor: "red",
+};
 
 const Forms = () => {
   // bellow creates only input["text"]
@@ -18,27 +23,36 @@ const Forms = () => {
   const formDatas10 = [
     {
       id: {
-        // label:"ID" // add label for label for input
+        label: "ID",
         type: "text",
         value: "id",
       },
     },
     {
-      name: {
-        type: "text",
-        value: "name",
+      password: {
+        label: "Pass",
+        type: "password",
+        value: "password",
+        minLength: 6,
+      },
+    },
+    {
+      email: {
+        // label: "E-Mail",
+        type: "email",
+        value: "email",
       },
     },
     {
       age: {
-        type: "text",
-        value: "age",
+        type: "date",
+        value: "",
         required: true,
       },
     },
     {
       note: {
-        type: "text",
+        type: "textarea",
         value: "note",
         required: true,
       },
@@ -56,10 +70,49 @@ const Forms = () => {
     },
   ];
 
+  const formDatas20 = [
+    {
+      id: {
+        label: "ID",
+        type: "text",
+        value: "id",
+      },
+    },
+    {
+      password: {
+        label: "Pass",
+        type: "password",
+        value: "password",
+        minLength: 6,
+      },
+    },
+  ];
+
+  const formDatas21 = [
+    {
+      name: {
+        label: "name",
+        type: "text",
+        value: "name",
+      },
+    },
+    {
+      note: {
+        label: "Pass",
+        type: "textarea",
+        value: "note",
+        minLength: 6,
+      },
+    },
+  ];
+
   return (
     <div>
       <h1>Forms</h1>
-      <CreateForms data={formDatas10} />
+      <div>
+        <CreateForms data={formDatas10} />
+        {/* <CreateForms data={[formDatas20, formDatas21]} /> */}
+      </div>
     </div>
   );
 };

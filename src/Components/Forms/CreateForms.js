@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import "./style/style.css";
 
-// TODO : DO Form Labels !
-
 const CreateForms = ({ data }) => {
   const [isError, setIsError] = useState(false);
   const [isArray, setIsArray] = useState(null);
@@ -36,7 +34,7 @@ const CreateForms = ({ data }) => {
     }
 
     try {
-      console.log(typeof data);
+      // console.log(typeof data, Array.isArray(data), data);
       if (Array.isArray(data)) {
         setIsArray(true);
         setFormData(data);
@@ -46,7 +44,6 @@ const CreateForms = ({ data }) => {
       if (typeof data === "object") {
         setIsArray(false);
         setFormData(data);
-        console.log("YESSSSSSSSSSSSSS");
       } else {
         setIsError(true);
         error("Error: data should be array or object, check doc !");
@@ -132,7 +129,11 @@ const CreateForms = ({ data }) => {
 
     if (!isArray) {
       return (
-        <form onSubmit={(e) => onFormSubmit(e)}>
+        <form
+          autoComplete="off"
+          className="create-form"
+          onSubmit={(e) => onFormSubmit(e)}
+        >
           {Object.keys(formData).map((key, i) => {
             return (
               <div key={i} className="form-group">
@@ -157,7 +158,11 @@ const CreateForms = ({ data }) => {
     }
 
     return (
-      <form onSubmit={(e) => onFormSubmit(e)}>
+      <form
+        autoComplete="off"
+        className="create-form"
+        onSubmit={(e) => onFormSubmit(e)}
+      >
         {formData[0] &&
           formData.map((data, i) => {
             try {
@@ -165,6 +170,32 @@ const CreateForms = ({ data }) => {
               const inData = data[objectKey];
               const dataType = inData.type;
               const stateValue = formData[i][objectKey].value;
+
+              const inputProps = {
+                type: formData[i][objectKey].type
+                  ? formData[i][objectKey].type
+                  : "text",
+                minLength:
+                  formData[i][objectKey].minLength &&
+                  formData[i][objectKey].minLength,
+                id: objectKey,
+                name: objectKey,
+                required: formData[i][objectKey].required,
+                value: stateValue,
+                onChange: (e) => onFormChange(e, i, objectKey),
+              };
+
+              const textareaProps = {
+                name: objectKey,
+                id: objectKey,
+                required: formData[i][objectKey].required,
+                value: stateValue,
+                onChange: (e) => onFormChange(e, i, objectKey),
+              };
+
+              const labelInside = formData[i][objectKey].label
+                ? formData[i][objectKey].label
+                : objectKey;
 
               if (dataType === "select") {
                 return (
@@ -187,16 +218,33 @@ const CreateForms = ({ data }) => {
                   </div>
                 );
               }
-              if (dataType === "text") {
+              if (
+                dataType === "text" ||
+                dataType === "date" ||
+                dataType === "email" ||
+                dataType === "password" ||
+                dataType === "color" ||
+                dataType === "file" ||
+                dataType === "hidden" ||
+                dataType === "image" ||
+                dataType === "number" ||
+                dataType === "tel" ||
+                dataType === "time" ||
+                dataType === "url" ||
+                dataType === "week"
+              ) {
                 return (
                   <div key={i} className="form-group">
-                    <input
-                      type="text"
-                      name={objectKey}
-                      required={formData[i][objectKey].required}
-                      value={formData[i][objectKey].value}
-                      onChange={(e) => onFormChange(e, i, objectKey)}
-                    />
+                    <label htmlFor={objectKey}>{labelInside}</label>
+                    <input {...inputProps} />
+                  </div>
+                );
+              }
+              if (dataType === "textarea") {
+                return (
+                  <div key={i} className="form-group">
+                    <label htmlFor={objectKey}>{labelInside}</label>
+                    <textarea {...textareaProps} />
                   </div>
                 );
               }

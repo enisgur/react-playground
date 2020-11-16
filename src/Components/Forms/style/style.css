@@ -1,0 +1,99 @@
+
+.create-form {
+    position: relative;
+    width: 100%;
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* margin: 10px 0; */
+
+}
+
+.create-form .form-group {
+    width: 95%;
+    margin-top: 20px;
+}
+
+.create-form .form-group label {
+    width: 100%;
+}
+
+.create-form .form-group input[type=text],
+.create-form .form-group input[type=date],
+.create-form .form-group input[type=email],
+.create-form .form-group input[type=password],
+.create-form .form-group input[type=color],
+.create-form .form-group input[type=file],
+.create-form .form-group input[type=image],
+.create-form .form-group input[type=number],
+.create-form .form-group input[type=tel],
+.create-form .form-group input[type=time],
+.create-form .form-group input[type=url],
+.create-form .form-group input[type=week],
+.create-form .form-group textarea,
+.create-form .form-group select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.create-form .form-group textarea {
+    height: 120px;
+    resize: none;
+}
+.create-form .form-group input[type=hidden] {
+    display: none
+}
+
+.create-form .form-group label {
+    width: 100%;
+    padding: 12px 5px;
+    text-transform: capitalize;
+    
+}
+
+.create-form .form-group select option {
+    font-size: 1.2em;
+}
+
+
+/* background-color: #4CAF50; Green */
+  /* border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer; */
+
+
+.create-form input[type=submit] {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    
+
+    padding: 12px 22px;
+    text-align: center;
+    text-decoration: none;
+    /* display: inline-block; */
+    display: flex;
+    align-self: flex-end;
+    font-size: 14px;
+    /* margin: 4px 2px; */
+    margin-right: 2.5%;
+    margin-top: 12px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.create-form input[type=submit]:hover {
+    background-color: #555555;
+    color: white;
+}
