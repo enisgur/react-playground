@@ -56,15 +56,10 @@ const CreateForms = ({ data }) => {
       setFormData([]);
       setReadyData({});
       setRequiredInputs([]);
+      setIsError(false);
+      setIsArray(null);
     };
   }, [data]);
-
-  useEffect(() => {
-    // console.log(formData);
-    // console.log("readyDATA : ", readyData);
-    // console.log(requiredInputs);
-    // console.log(readyData);
-  }, [requiredInputs, readyData]);
 
   const onFormChange = (e, i, objectKey) => {
     try {
@@ -205,7 +200,6 @@ const CreateForms = ({ data }) => {
                       value={stateValue}
                       onChange={(e) => onFormChange(e, i, objectKey)}
                     >
-                      {/* TODO : fix here later for label or default value for Select option */}
                       <option value="">Select</option>
                       {data[objectKey].options.map((option) => {
                         return (
