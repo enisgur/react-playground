@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Table from "./Pages/Table/Table";
 import Forms from "./Pages/Forms/Forms";
+import ModalPage from "./Pages/Modal";
 
 import Pagination from "./examples/Pagination/Pagination";
 
@@ -18,6 +19,7 @@ function App() {
           <Link to="/table">Table</Link>
           <Link to="/examplepagination">pagination example</Link>
           <Link to="/forms">Forms</Link>
+          <Link to="/modal">Modal</Link>
         </div>
 
         <Route
@@ -30,6 +32,7 @@ function App() {
         <Route exact path="/table" component={Table} />
         <Route exact path="/forms" component={Forms} />
         <Route exact path="/dash" component={Dashboard} />
+        <Route exact path="/modal" component={ModalPage} />
         <Route exact path="/examplepagination" component={Pagination} />
       </Router>
     </div>

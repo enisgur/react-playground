@@ -38,13 +38,14 @@ const Forms = () => {
     },
     {
       email: {
-        // label: "E-Mail",
+        // label: "E-Mail", // if you dont put label it aout gets object name email
         type: "email",
         value: "email",
       },
     },
     {
       age: {
+        // label: "zaa", // if you dont put label it aout gets object name age
         type: "date",
         value: "",
         required: true,
@@ -59,6 +60,7 @@ const Forms = () => {
     },
     {
       customer: {
+        // label: "zaaa",
         type: "select",
         value: "",
         required: true,
