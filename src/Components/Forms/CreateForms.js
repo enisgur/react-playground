@@ -9,8 +9,8 @@ const CreateForms = ({ data }) => {
   const [readyData, setReadyData] = useState({}); //DO this one
   const [requiredInputs, setRequiredInputs] = useState([]);
 
-  function error(msg) {
-    console.log(msg);
+  function error(msg, errmsg = null) {
+    console.log(msg, errmsg);
   }
 
   useEffect(() => {
@@ -165,7 +165,9 @@ const CreateForms = ({ data }) => {
               const inData = data[objectKey];
               const dataType = inData.type;
               const isDataDisabled = inData.disabled;
-              const stateValue = formData[i][objectKey].value;
+              const stateValue = formData[i][objectKey].value
+                ? formData[i][objectKey].value
+                : "";
 
               const inputProps = {
                 type: formData[i][objectKey].type
@@ -179,7 +181,8 @@ const CreateForms = ({ data }) => {
                 required: formData[i][objectKey].required,
                 disabled: isDataDisabled,
                 value: stateValue,
-                onChange: (e) => onFormChange(e, i, objectKey),
+                onChange: (e) =>
+                  isDataDisabled ? null : onFormChange(e, i, objectKey),
               };
 
               const textareaProps = {
@@ -188,7 +191,8 @@ const CreateForms = ({ data }) => {
                 required: formData[i][objectKey].required,
                 disabled: isDataDisabled,
                 value: stateValue,
-                onChange: (e) => onFormChange(e, i, objectKey),
+                onChange: (e) =>
+                  isDataDisabled ? null : onFormChange(e, i, objectKey),
               };
 
               const labelInside = formData[i][objectKey].label
@@ -202,7 +206,9 @@ const CreateForms = ({ data }) => {
                       name={objectKey}
                       value={stateValue}
                       disabled={isDataDisabled}
-                      onChange={(e) => onFormChange(e, i, objectKey)}
+                      onChange={(e) =>
+                        isDataDisabled ? null : onFormChange(e, i, objectKey)
+                      }
                     >
                       <option value="">Select</option>
                       {data[objectKey].options.map((option) => {
@@ -248,7 +254,7 @@ const CreateForms = ({ data }) => {
               }
               return null;
             } catch (err) {
-              error("Error: CreateForm > render return");
+              error("Error: CreateForm > render return", err.message);
               return null;
             }
           })}
