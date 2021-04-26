@@ -12,6 +12,8 @@ So I can use that components in my other projects to make it easy for me.
 3. Chart
    - Not Started Yet.
 4. Chat (need backend)
-   - Not Started Yet
+   - Not Started Yet.
+5. Modal
+   - Not Started Yet.
 
 _still in development_
