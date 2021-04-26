@@ -41,6 +41,7 @@ const Forms = () => {
         // label: "E-Mail", // if you dont put label it aout gets object name email
         type: "email",
         value: "email",
+        disabled: true,
       },
     },
     {

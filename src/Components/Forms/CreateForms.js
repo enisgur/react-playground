@@ -164,6 +164,7 @@ const CreateForms = ({ data }) => {
               const objectKey = Object.keys(data);
               const inData = data[objectKey];
               const dataType = inData.type;
+              const isDataDisabled = inData.disabled;
               const stateValue = formData[i][objectKey].value;
 
               const inputProps = {
@@ -176,6 +177,7 @@ const CreateForms = ({ data }) => {
                 id: objectKey,
                 name: objectKey,
                 required: formData[i][objectKey].required,
+                disabled: isDataDisabled,
                 value: stateValue,
                 onChange: (e) => onFormChange(e, i, objectKey),
               };
@@ -184,6 +186,7 @@ const CreateForms = ({ data }) => {
                 name: objectKey,
                 id: objectKey,
                 required: formData[i][objectKey].required,
+                disabled: isDataDisabled,
                 value: stateValue,
                 onChange: (e) => onFormChange(e, i, objectKey),
               };
@@ -198,6 +201,7 @@ const CreateForms = ({ data }) => {
                     <select
                       name={objectKey}
                       value={stateValue}
+                      disabled={isDataDisabled}
                       onChange={(e) => onFormChange(e, i, objectKey)}
                     >
                       <option value="">Select</option>
