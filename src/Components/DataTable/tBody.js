@@ -73,26 +73,24 @@ export default function tBody(
                     buttons[0] &&
                     buttons.map((aButtons, i) => {
                       return (
-                        <>
-                          <button
-                            onClick={
-                              aButtons.callBack && ((e) => aButtons.callBack(e))
-                            }
-                            key={
-                              aButtons.id
-                                ? aButtons.id
-                                : aButtons._id
-                                ? aButtons._id
-                                : i
-                            }
-                            className={`table-button ${
-                              aButtons.class ? aButtons.class : ""
-                            }`}
-                            id={column.id ? column.id : column._id}
-                          >
-                            {aButtons.label ? aButtons.label : "No Label"}
-                          </button>
-                        </>
+                        <button
+                          onClick={
+                            aButtons.callBack && ((e) => aButtons.callBack(e))
+                          }
+                          key={
+                            aButtons.id
+                              ? aButtons.id
+                              : aButtons._id
+                              ? aButtons._id
+                              : i
+                          }
+                          className={`table-button ${
+                            aButtons.class ? aButtons.class : ""
+                          }`}
+                          id={column.id ? column.id : column._id}
+                        >
+                          {aButtons.label ? aButtons.label : "No Label"}
+                        </button>
                       );
                     })}
                 </td>
