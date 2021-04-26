@@ -46,7 +46,7 @@ export async function setManualHeadings(manuealHead) {
   if (manuealHead.length > 0) {
     manuealHead.map((head) => {
       // setRenderManuelHeading((f) => [...f, head]);
-      manuelArray.push(head);
+      return manuelArray.push(head);
     });
     return manuelArray;
   }
